@@ -177,6 +177,149 @@
             </div>
         </div>
 
+        <!-- Partial Sums Stadium Game -->
+        <div class="game-area" id="partialSums">
+            <button class="back-btn" id="partialSumsBackBtn">← Back to Games</button>
+            <h2 style="text-align: center; color: #1976d2; margin: 10px 0;">🧮 Partial Sums Stadium</h2>
+            <p style="text-align: center; font-size: 1.1em; margin-bottom: 15px;">Break apart numbers by place value and add step by step!</p>
+            
+            <!-- Score Display -->
+            <div style="text-align: center; margin-bottom: 15px;">
+                <div style="display: inline-block; background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%); padding: 10px 20px; border-radius: 10px; border: 2px solid #388e3c;">
+                    <span style="font-size: 1.2em; color: #2e7d32; font-weight: bold;">Score: <span id="partialSumsScore">0</span>/5</span>
+                </div>
+            </div>
+
+            <!-- Main Problem Display -->
+            <div style="background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%); border: 3px solid #8b4513; border-radius: 15px; padding: 20px; margin-bottom: 20px; text-align: center;">
+                <div style="font-size: 1.1em; color: #f57c00; font-weight: bold; margin-bottom: 10px;">⚾ Addition Problem:</div>
+                <div style="font-size: 3em; font-weight: bold; color: #1976d2; font-family: 'Courier New', monospace;" id="partialSumsProblem">
+                    <span id="psAddend1">0</span> + <span id="psAddend2">0</span>
+                </div>
+            </div>
+
+            <!-- Work Area -->
+            <div id="partialSumsAnimation" style="background: white; border: 3px solid #8b4513; border-radius: 15px; padding: 20px; margin-bottom: 20px;">
+                
+                <!-- Step 1: Break Apart Numbers -->
+                <div id="psStep1" style="display: none;">
+                    <h3 style="text-align: center; color: #2e7d32; margin: 10px 0;">Step 1: Break Apart Each Number 📊</h3>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                        <!-- First Number Breakdown -->
+                        <div style="background: #e3f2fd; border: 2px solid #1976d2; border-radius: 10px; padding: 15px;">
+                            <div style="text-align: center; font-size: 2em; color: #1976d2; font-weight: bold; margin-bottom: 15px;" id="psBreakNum1">477</div>
+                            <div style="text-align: center; font-size: 1em; color: #666; margin-bottom: 10px;">Break it apart:</div>
+                            <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin: 10px 0;">
+                                <input type="number" id="psHundreds1Input" class="ps-place-input" placeholder="___" style="width: 70px; padding: 10px; font-size: 1.3em; text-align: center; border: 2px solid #1976d2; border-radius: 8px; font-family: 'Courier New', monospace;">
+                                <span style="font-size: 1.3em; color: #333;">+</span>
+                                <input type="number" id="psTens1Input" class="ps-place-input" placeholder="__" style="width: 70px; padding: 10px; font-size: 1.3em; text-align: center; border: 2px solid #1976d2; border-radius: 8px; font-family: 'Courier New', monospace;">
+                                <span style="font-size: 1.3em; color: #333;">+</span>
+                                <input type="number" id="psOnes1Input" class="ps-place-input" placeholder="_" style="width: 70px; padding: 10px; font-size: 1.3em; text-align: center; border: 2px solid #1976d2; border-radius: 8px; font-family: 'Courier New', monospace;">
+                            </div>
+                            <div style="text-align: center; font-size: 0.85em; color: #666; margin-top: 5px;">
+                                <span style="display: inline-block; width: 70px;">hundreds</span>
+                                <span style="display: inline-block; width: 70px; margin-left: 20px;">tens</span>
+                                <span style="display: inline-block; width: 70px; margin-left: 20px;">ones</span>
+                            </div>
+                        </div>
+
+                        <!-- Second Number Breakdown -->
+                        <div style="background: #ffebee; border: 2px solid #d32f2f; border-radius: 10px; padding: 15px;">
+                            <div style="text-align: center; font-size: 2em; color: #d32f2f; font-weight: bold; margin-bottom: 15px;" id="psBreakNum2">258</div>
+                            <div style="text-align: center; font-size: 1em; color: #666; margin-bottom: 10px;">Break it apart:</div>
+                            <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin: 10px 0;">
+                                <input type="number" id="psHundreds2Input" class="ps-place-input" placeholder="___" style="width: 70px; padding: 10px; font-size: 1.3em; text-align: center; border: 2px solid #d32f2f; border-radius: 8px; font-family: 'Courier New', monospace;">
+                                <span style="font-size: 1.3em; color: #333;">+</span>
+                                <input type="number" id="psTens2Input" class="ps-place-input" placeholder="__" style="width: 70px; padding: 10px; font-size: 1.3em; text-align: center; border: 2px solid #d32f2f; border-radius: 8px; font-family: 'Courier New', monospace;">
+                                <span style="font-size: 1.3em; color: #333;">+</span>
+                                <input type="number" id="psOnes2Input" class="ps-place-input" placeholder="_" style="width: 70px; padding: 10px; font-size: 1.3em; text-align: center; border: 2px solid #d32f2f; border-radius: 8px; font-family: 'Courier New', monospace;">
+                            </div>
+                            <div style="text-align: center; font-size: 0.85em; color: #666; margin-top: 5px;">
+                                <span style="display: inline-block; width: 70px;">hundreds</span>
+                                <span style="display: inline-block; width: 70px; margin-left: 20px;">tens</span>
+                                <span style="display: inline-block; width: 70px; margin-left: 20px;">ones</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Add Partial Sums -->
+                <div id="psStep2" style="display: none;">
+                    <h3 style="text-align: center; color: #2e7d32; margin: 10px 0;">Step 2: Add Each Place Value 🎯</h3>
+                    <div style="background: #fff3e0; border: 2px solid #f57c00; border-radius: 10px; padding: 20px; margin: 20px auto; max-width: 450px;">
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin: 15px 0; font-size: 1.3em;">
+                            <span id="psH1Display" style="color: #1976d2; font-weight: bold;">400</span>
+                            <span>+</span>
+                            <span id="psH2Display" style="color: #d32f2f; font-weight: bold;">200</span>
+                            <span>=</span>
+                            <input type="number" id="psHundredsSumInput" placeholder="?" style="width: 80px; padding: 8px; font-size: 1.1em; text-align: center; border: 2px solid #f57c00; border-radius: 8px; font-family: 'Courier New', monospace;">
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin: 15px 0; font-size: 1.3em;">
+                            <span id="psT1Display" style="color: #1976d2; font-weight: bold;">70</span>
+                            <span>+</span>
+                            <span id="psT2Display" style="color: #d32f2f; font-weight: bold;">50</span>
+                            <span>=</span>
+                            <input type="number" id="psTensSumInput" placeholder="?" style="width: 80px; padding: 8px; font-size: 1.1em; text-align: center; border: 2px solid #f57c00; border-radius: 8px; font-family: 'Courier New', monospace;">
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin: 15px 0; font-size: 1.3em;">
+                            <span id="psO1Display" style="color: #1976d2; font-weight: bold;">7</span>
+                            <span>+</span>
+                            <span id="psO2Display" style="color: #d32f2f; font-weight: bold;">8</span>
+                            <span>=</span>
+                            <input type="number" id="psOnesSumInput" placeholder="?" style="width: 80px; padding: 8px; font-size: 1.1em; text-align: center; border: 2px solid #f57c00; border-radius: 8px; font-family: 'Courier New', monospace;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Final Sum -->
+                <div id="psStep3" style="display: none;">
+                    <h3 style="text-align: center; color: #2e7d32; margin: 10px 0;">Step 3: Add the Partial Sums Together! 🏆</h3>
+                    <div style="background: #c8e6c9; border: 3px solid #388e3c; border-radius: 15px; padding: 20px; margin: 20px auto; max-width: 400px; text-align: center;">
+                        <div id="psFinalSumDisplay" style="font-size: 1.5em; color: #2e7d32; line-height: 2; font-weight: bold;"></div>
+                        <div style="border-top: 3px solid #2e7d32; margin: 15px 0;"></div>
+                        <div style="font-size: 1.2em; color: #2e7d32; font-weight: bold; margin-bottom: 10px;">Final Answer:</div>
+                        <input type="number" id="psAnswerInput" style="width: 150px; padding: 12px; font-size: 2em; text-align: center; border: 3px solid #388e3c; border-radius: 10px; font-family: 'Courier New', monospace;" placeholder="???">
+                    </div>
+                </div>
+
+                <!-- Instructions -->
+                <div id="psInstructions" style="text-align: center; padding: 30px;">
+                    <div style="font-size: 1.3em; color: #666; margin-bottom: 15px;">👆 Click "Start Problem" to begin!</div>
+                    <div style="background: #fff3e0; border: 2px solid #f57c00; border-radius: 10px; padding: 15px; max-width: 500px; margin: 0 auto;">
+                        <h4 style="color: #e65100; margin-top: 0;">📚 Partial Sums Strategy:</h4>
+                        <ol style="text-align: left; line-height: 1.6; color: #333; font-size: 0.95em;">
+                            <li>Break apart numbers by place value (hundreds, tens, ones)</li>
+                            <li>Add each place value separately</li>
+                            <li>Add all the partial sums together</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Control Buttons -->
+            <div style="text-align: center; margin-bottom: 20px;">
+                <button id="psStartBtn" class="btn btn-primary" style="font-size: 1.2em; display: inline-block;">Start Problem ⚾</button>
+                <button id="psNextStepBtn" class="btn btn-success" style="font-size: 1.2em; display: none;">Check & Continue →</button>
+                <button id="psCheckBtn" class="btn btn-warning" style="font-size: 1.2em; display: none;">Check Answer ✓</button>
+                <button id="psNextProblemBtn" class="btn btn-primary" style="font-size: 1.2em; display: none;">Next Problem 🎯</button>
+            </div>
+
+            <!-- Feedback -->
+            <div id="partialSumsFeedback" class="feedback" style="display: none;"></div>
+
+            <!-- Results Screen -->
+            <div id="partialSumsResults" style="display: none; text-align: center; background: linear-gradient(135deg, #fff9c4 0%, #c8e6c9 100%); padding: 30px; border-radius: 20px; margin-top: 20px;">
+                <h2 style="color: #2e7d32; margin-bottom: 15px; font-size: 1.8em;">🎉 Great Adding! 🎉</h2>
+                <div style="font-size: 60px; margin: 15px 0;" id="partialSumsResultsEmoji"></div>
+                <div style="font-size: 1.2em; color: #2e7d32; margin-bottom: 20px; line-height: 1.4;">
+                    <p style="font-size: 1.3em; margin-bottom: 10px;">You scored <span id="partialSumsFinalScore"></span> out of 5!</p>
+                    <p id="partialSumsResultsMessage"></p>
+                </div>
+                <button id="partialSumsRestartBtn" class="btn btn-primary" style="font-size: 1.2em;">Practice Again! 🧮</button>
+            </div>
+        </div>
+
         <!-- Ticket Booth Popup -->
         <div class="ticket-overlay" id="ticketOverlay">
             <div class="ticket-booth">
@@ -255,6 +398,17 @@
         let oddEvenScore = 0;
         let oddEvenCurrentNumber = 0;
         const oddEvenTotalQuestions = 10;
+        
+        // Partial Sums Stadium game variables
+        let partialSumsCurrentQuestion = 0;
+        let partialSumsScore = 0;
+        let psAddend1 = 0;
+        let psAddend2 = 0;
+        let psCorrectAnswer = 0;
+        let psCurrentStep = 0;
+        let psHundreds1 = 0, psTens1 = 0, psOnes1 = 0;
+        let psHundreds2 = 0, psTens2 = 0, psOnes2 = 0;
+        const partialSumsTotalQuestions = 5;
         
         const walkathonQuestions = [
             {
@@ -344,6 +498,7 @@
             document.getElementById('walkathonCard').addEventListener('click', () => showGame('walkathon'));
             document.getElementById('compareCard').addEventListener('click', () => showGame('compare'));
             document.getElementById('oddEvenCard').addEventListener('click', () => showGame('oddEven'));
+            document.getElementById('partialSumsCard').addEventListener('click', () => showGame('partialSums'));
 
             // Back buttons
             document.getElementById('builderBackBtn').addEventListener('click', showMainMenu);
@@ -353,6 +508,7 @@
             document.getElementById('walkathonBackBtn').addEventListener('click', showMainMenu);
             document.getElementById('compareBackBtn').addEventListener('click', showMainMenu);
             document.getElementById('oddEvenBackBtn').addEventListener('click', showMainMenu);
+            document.getElementById('partialSumsBackBtn').addEventListener('click', showMainMenu);
 
             // Home Run Derby buttons
             document.getElementById('rollBtn').addEventListener('click', rollDice);
@@ -415,6 +571,18 @@
             });
             document.getElementById('oddEvenNextBtn').addEventListener('click', nextOddEvenQuestion);
             document.getElementById('oddEvenRestartBtn').addEventListener('click', restartOddEvenGame);
+            
+            // Partial Sums Stadium buttons
+            document.getElementById('psStartBtn').addEventListener('click', startPartialSumsAnimation);
+            document.getElementById('psNextStepBtn').addEventListener('click', nextPartialSumsStep);
+            document.getElementById('psCheckBtn').addEventListener('click', checkPartialSumsAnswer);
+            document.getElementById('psNextProblemBtn').addEventListener('click', nextPartialSumsProblem);
+            document.getElementById('psAnswerInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkPartialSumsAnswer();
+                }
+            });
+            document.getElementById('partialSumsRestartBtn').addEventListener('click', restartPartialSumsGame);
         });
 
         function showGame(gameId) {
@@ -428,6 +596,7 @@
             if (gameId === 'walkathon') initWalkathon();
             if (gameId === 'compare') initCompare();
             if (gameId === 'oddEven') initOddEven();
+            if (gameId === 'partialSums') initPartialSums();
             if (gameId === 'equipment') {
                 generateNewEquipmentProblem();
                 // Focus will be set by generateNewEquipmentProblem()
@@ -1379,6 +1548,254 @@
             document.getElementById('oddEvenNumber').parentElement.parentElement.style.display = 'block';
             initOddEven();
         }
+
+        // ===== PARTIAL SUMS STADIUM GAME =====
+        function initPartialSums() {
+            partialSumsCurrentQuestion = 0;
+            partialSumsScore = 0;
+            psCurrentStep = 0;
+            document.getElementById('partialSumsScore').textContent = partialSumsScore;
+            document.getElementById('partialSumsResults').style.display = 'none';
+            document.getElementById('partialSumsFeedback').style.display = 'none';
+            generatePartialSumsProblem();
+        }
+
+        function generatePartialSumsProblem() {
+            partialSumsCurrentQuestion++;
+            psCurrentStep = 0;
+            
+            // Generate two 3-digit numbers
+            psAddend1 = Math.floor(Math.random() * 900) + 100; // 100-999
+            psAddend2 = Math.floor(Math.random() * 900) + 100; // 100-999
+            psCorrectAnswer = psAddend1 + psAddend2;
+            
+            // Break apart the numbers
+            psHundreds1 = Math.floor(psAddend1 / 100) * 100;
+            psTens1 = Math.floor((psAddend1 % 100) / 10) * 10;
+            psOnes1 = psAddend1 % 10;
+            
+            psHundreds2 = Math.floor(psAddend2 / 100) * 100;
+            psTens2 = Math.floor((psAddend2 % 100) / 10) * 10;
+            psOnes2 = psAddend2 % 10;
+            
+            // Display problem
+            document.getElementById('psAddend1').textContent = psAddend1;
+            document.getElementById('psAddend2').textContent = psAddend2;
+            
+            // Reset UI
+            document.getElementById('psInstructions').style.display = 'block';
+            document.getElementById('psStep1').style.display = 'none';
+            document.getElementById('psStep2').style.display = 'none';
+            document.getElementById('psStep3').style.display = 'none';
+            document.getElementById('psStartBtn').style.display = 'inline-block';
+            document.getElementById('psNextStepBtn').style.display = 'none';
+            document.getElementById('psCheckBtn').style.display = 'none';
+            document.getElementById('psNextProblemBtn').style.display = 'none';
+            document.getElementById('partialSumsFeedback').style.display = 'none';
+            document.getElementById('psAnswerInput').value = '';
+        }
+
+        function startPartialSumsAnimation() {
+            psCurrentStep = 1;
+            document.getElementById('psInstructions').style.display = 'none';
+            document.getElementById('psStep1').style.display = 'block';
+            document.getElementById('psStartBtn').style.display = 'none';
+            document.getElementById('psNextStepBtn').style.display = 'inline-block';
+            
+            // Show numbers to break apart
+            document.getElementById('psBreakNum1').textContent = psAddend1;
+            document.getElementById('psBreakNum2').textContent = psAddend2;
+            
+            // Clear all inputs
+            document.getElementById('psHundreds1Input').value = '';
+            document.getElementById('psTens1Input').value = '';
+            document.getElementById('psOnes1Input').value = '';
+            document.getElementById('psHundreds2Input').value = '';
+            document.getElementById('psTens2Input').value = '';
+            document.getElementById('psOnes2Input').value = '';
+            
+            // Focus first input
+            setTimeout(() => {
+                document.getElementById('psHundreds1Input').focus();
+            }, 100);
+        }
+
+        function nextPartialSumsStep() {
+            const feedback = document.getElementById('partialSumsFeedback');
+            
+            if (psCurrentStep === 1) {
+                // Check step 1 inputs
+                const h1 = parseInt(document.getElementById('psHundreds1Input').value);
+                const t1 = parseInt(document.getElementById('psTens1Input').value);
+                const o1 = parseInt(document.getElementById('psOnes1Input').value);
+                const h2 = parseInt(document.getElementById('psHundreds2Input').value);
+                const t2 = parseInt(document.getElementById('psTens2Input').value);
+                const o2 = parseInt(document.getElementById('psOnes2Input').value);
+                
+                if (isNaN(h1) || isNaN(t1) || isNaN(o1) || isNaN(h2) || isNaN(t2) || isNaN(o2)) {
+                    feedback.textContent = '⚠️ Please fill in all the boxes!';
+                    feedback.className = 'feedback error';
+                    feedback.style.display = 'block';
+                    return;
+                }
+                
+                if (h1 !== psHundreds1 || t1 !== psTens1 || o1 !== psOnes1 || 
+                    h2 !== psHundreds2 || t2 !== psTens2 || o2 !== psOnes2) {
+                    feedback.innerHTML = `❌ Not quite! Check your place values.<br><small>Hint: ${psAddend1} = ${psHundreds1} + ${psTens1} + ${psOnes1}</small>`;
+                    feedback.className = 'feedback error';
+                    feedback.style.display = 'block';
+                    return;
+                }
+                
+                // Move to step 2
+                psCurrentStep = 2;
+                feedback.style.display = 'none';
+                document.getElementById('psStep1').style.display = 'none';
+                document.getElementById('psStep2').style.display = 'block';
+                
+                // Show the values they entered
+                document.getElementById('psH1Display').textContent = psHundreds1;
+                document.getElementById('psH2Display').textContent = psHundreds2;
+                document.getElementById('psT1Display').textContent = psTens1;
+                document.getElementById('psT2Display').textContent = psTens2;
+                document.getElementById('psO1Display').textContent = psOnes1;
+                document.getElementById('psO2Display').textContent = psOnes2;
+                
+                // Clear step 2 inputs
+                document.getElementById('psHundredsSumInput').value = '';
+                document.getElementById('psTensSumInput').value = '';
+                document.getElementById('psOnesSumInput').value = '';
+                
+                // Focus first input
+                setTimeout(() => {
+                    document.getElementById('psHundredsSumInput').focus();
+                }, 100);
+                
+            } else if (psCurrentStep === 2) {
+                // Check step 2 inputs
+                const hSum = parseInt(document.getElementById('psHundredsSumInput').value);
+                const tSum = parseInt(document.getElementById('psTensSumInput').value);
+                const oSum = parseInt(document.getElementById('psOnesSumInput').value);
+                
+                const correctHSum = psHundreds1 + psHundreds2;
+                const correctTSum = psTens1 + psTens2;
+                const correctOSum = psOnes1 + psOnes2;
+                
+                if (isNaN(hSum) || isNaN(tSum) || isNaN(oSum)) {
+                    feedback.textContent = '⚠️ Please fill in all the sums!';
+                    feedback.className = 'feedback error';
+                    feedback.style.display = 'block';
+                    return;
+                }
+                
+                if (hSum !== correctHSum || tSum !== correctTSum || oSum !== correctOSum) {
+                    feedback.innerHTML = `❌ Check your addition!<br><small>${psHundreds1} + ${psHundreds2} = ${correctHSum}, ${psTens1} + ${psTens2} = ${correctTSum}, ${psOnes1} + ${psOnes2} = ${correctOSum}</small>`;
+                    feedback.className = 'feedback error';
+                    feedback.style.display = 'block';
+                    return;
+                }
+                
+                // Move to step 3
+                psCurrentStep = 3;
+                feedback.style.display = 'none';
+                document.getElementById('psStep2').style.display = 'none';
+                document.getElementById('psStep3').style.display = 'block';
+                document.getElementById('psNextStepBtn').style.display = 'none';
+                document.getElementById('psCheckBtn').style.display = 'inline-block';
+                
+                // Show the partial sums
+                document.getElementById('psFinalSumDisplay').innerHTML = `
+                    ${correctHSum}<br>
+                    + ${correctTSum}<br>
+                    + ${correctOSum}
+                `;
+                
+                // Clear and focus final input
+                document.getElementById('psAnswerInput').value = '';
+                setTimeout(() => {
+                    document.getElementById('psAnswerInput').focus();
+                }, 100);
+            }
+        }
+
+        function checkPartialSumsAnswer() {
+            const userAnswer = parseInt(document.getElementById('psAnswerInput').value);
+            const feedback = document.getElementById('partialSumsFeedback');
+            
+            if (isNaN(userAnswer)) {
+                feedback.textContent = 'Please enter a number!';
+                feedback.className = 'feedback error';
+                feedback.style.display = 'block';
+                return;
+            }
+            
+            if (userAnswer === psCorrectAnswer) {
+                partialSumsScore++;
+                document.getElementById('partialSumsScore').textContent = partialSumsScore;
+                feedback.innerHTML = `⚾ Home Run! ${psAddend1} + ${psAddend2} = ${psCorrectAnswer}! Perfect!`;
+                feedback.className = 'feedback success';
+                
+                // Add celebration
+                document.getElementById('psStep3').classList.add('celebrate');
+                setTimeout(() => {
+                    document.getElementById('psStep3').classList.remove('celebrate');
+                }, 600);
+            } else {
+                feedback.innerHTML = `❌ Not quite! The correct answer is ${psCorrectAnswer}.<br><small>Remember to add all the partial sums: ${psHundreds1 + psHundreds2} + ${psTens1 + psTens2} + ${psOnes1 + psOnes2}</small>`;
+                feedback.className = 'feedback error';
+            }
+            
+            feedback.style.display = 'block';
+            document.getElementById('psCheckBtn').style.display = 'none';
+            
+            if (partialSumsCurrentQuestion < partialSumsTotalQuestions) {
+                document.getElementById('psNextProblemBtn').style.display = 'inline-block';
+            } else {
+                setTimeout(() => {
+                    showPartialSumsResults();
+                }, 2000);
+            }
+        }
+
+        function nextPartialSumsProblem() {
+            if (partialSumsCurrentQuestion < partialSumsTotalQuestions) {
+                generatePartialSumsProblem();
+            }
+        }
+
+        function showPartialSumsResults() {
+            // Hide game elements
+            document.getElementById('partialSumsAnimation').style.display = 'none';
+            document.getElementById('psNextProblemBtn').style.display = 'none';
+            document.getElementById('partialSumsFeedback').style.display = 'none';
+            document.getElementById('partialSumsProblem').parentElement.style.display = 'none';
+            
+            // Show results
+            const results = document.getElementById('partialSumsResults');
+            results.style.display = 'block';
+            
+            document.getElementById('partialSumsFinalScore').textContent = partialSumsScore;
+            
+            const percentage = Math.round((partialSumsScore / partialSumsTotalQuestions) * 100);
+            
+            if (percentage >= 80) {
+                document.getElementById('partialSumsResultsEmoji').textContent = '🏆';
+                document.getElementById('partialSumsResultsMessage').textContent = "Amazing! You're a partial sums superstar!";
+            } else if (percentage >= 60) {
+                document.getElementById('partialSumsResultsEmoji').textContent = '⭐';
+                document.getElementById('partialSumsResultsMessage').textContent = "Great job! You understand partial sums!";
+            } else {
+                document.getElementById('partialSumsResultsEmoji').textContent = '👍';
+                document.getElementById('partialSumsResultsMessage').textContent = "Good effort! Keep practicing breaking apart numbers!";
+            }
+        }
+
+        function restartPartialSumsGame() {
+            // Show game elements again
+            document.getElementById('partialSumsAnimation').style.display = 'block';
+            document.getElementById('partialSumsProblem').parentElement.style.display = 'block';
+            initPartialSums();
+        }
     </script>
 </body>
 </html><!DOCTYPE html>
@@ -1987,6 +2404,10 @@
             <div class="game-card" id="oddEvenCard">
                 <h3>🎯 Odd or Even Ballpark</h3>
                 <p>Sort the numbers into odd and even teams!</p>
+            </div>
+            <div class="game-card" id="partialSumsCard">
+                <h3>🧮 Partial Sums Stadium</h3>
+                <p>Break apart numbers and add them step by step!</p>
             </div>
         </div>
 
