@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell -Command:*)",
+      "Bash(del \"c:\\Users\\cneal\\Downloads\\corygames\\cles-math-games\\index_fixed.html\")",
+      "Bash(rm:*)",
+      "Bash(git restore:*)",
+      "Bash(index_new.html)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
