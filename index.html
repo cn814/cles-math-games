@@ -722,12 +722,450 @@
             .back-btn, .btn { display: none; }
             body { background: white; }
         }
+
+        /* ========== NEW FEATURES ========== */
+
+        /* Settings Bar */
+        .settings-bar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .settings-btn {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.5);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .settings-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.05);
+        }
+
+        .settings-btn.active {
+            background: rgba(255,255,255,0.4);
+            border-color: white;
+        }
+
+        /* Progress Dashboard */
+        .progress-dashboard {
+            background: rgba(255,255,255,0.15);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .progress-title {
+            color: white;
+            text-align: center;
+            margin: 0 0 15px 0;
+            font-size: 1.3em;
+        }
+
+        .progress-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            color: white;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        /* High Score Badge on Game Cards */
+        .high-score-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+            color: #333;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .game-card {
+            position: relative;
+        }
+
+        /* Difficulty Selector */
+        .difficulty-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .difficulty-btn {
+            padding: 8px 20px;
+            border: 2px solid #8b4513;
+            border-radius: 20px;
+            background: #f5deb3;
+            color: #8b4513;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .difficulty-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .difficulty-btn.active {
+            background: #2e7d32;
+            color: white;
+            border-color: #2e7d32;
+        }
+
+        .difficulty-btn.easy { border-color: #4caf50; }
+        .difficulty-btn.easy.active { background: #4caf50; }
+        .difficulty-btn.medium { border-color: #ff9800; }
+        .difficulty-btn.medium.active { background: #ff9800; }
+        .difficulty-btn.hard { border-color: #f44336; }
+        .difficulty-btn.hard.active { background: #f44336; }
+
+        /* Hint Button */
+        .hint-btn {
+            background: #9c27b0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
+            margin: 10px;
+        }
+
+        .hint-btn:hover {
+            background: #7b1fa2;
+            transform: scale(1.05);
+        }
+
+        .hint-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .hint-box {
+            background: #f3e5f5;
+            border: 2px solid #9c27b0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            display: none;
+        }
+
+        .hint-box.visible {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Loading Spinner */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .loading-overlay.visible {
+            display: flex;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #2e7d32;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Confetti */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1500;
+            overflow: hidden;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            top: -10px;
+            animation: confetti-fall 3s linear forwards;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(0) rotateZ(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotateZ(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+
+        body.dark-mode .game-card {
+            background: #2d2d44;
+            border-color: #4a4a6a;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .game-card h3 {
+            color: #64b5f6;
+        }
+
+        body.dark-mode .game-card p {
+            color: #a5d6a7;
+        }
+
+        body.dark-mode .game-card:hover {
+            border-color: #ff6b6b;
+        }
+
+        body.dark-mode .game-area {
+            background: #2d2d44;
+            border-color: #4a4a6a;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .game-title {
+            color: #64b5f6;
+        }
+
+        body.dark-mode .game-subtitle {
+            color: #b0b0b0;
+        }
+
+        body.dark-mode .feedback.success {
+            background: #1b5e20;
+            color: #a5d6a7;
+            border-color: #2e7d32;
+        }
+
+        body.dark-mode .feedback.error {
+            background: #b71c1c;
+            color: #ffcdd2;
+            border-color: #d32f2f;
+        }
+
+        body.dark-mode .announcer-booth {
+            background: #1565c0;
+        }
+
+        body.dark-mode .scoreboard-display {
+            background: #000;
+            border-color: #4a4a6a;
+        }
+
+        body.dark-mode .base {
+            background: #3d3d5c;
+            border-color: #4a4a6a;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .base-slot {
+            background: #3d3d5c;
+            border-color: #4a4a6a;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .cash-register {
+            background: #1b5e20;
+            border-color: #2e7d32;
+        }
+
+        body.dark-mode .stadium-grid {
+            background: #1b5e20;
+        }
+
+        body.dark-mode .stadium-seat {
+            background: #3d3d5c;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .equipment-container {
+            background: #1b5e20;
+        }
+
+        body.dark-mode .answer-input {
+            background: #3d3d5c;
+            color: #e0e0e0;
+            border-color: #4a4a6a;
+        }
+
+        body.dark-mode .progress-dashboard {
+            background: rgba(0,0,0,0.3);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        /* Mode Toggle (Practice/Quiz) */
+        .mode-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin: 15px 0;
+            background: #e0e0e0;
+            border-radius: 25px;
+            padding: 4px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .mode-btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 20px;
+            background: transparent;
+            color: #666;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .mode-btn.active {
+            background: #2e7d32;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        body.dark-mode .mode-toggle {
+            background: #3d3d5c;
+        }
+
+        body.dark-mode .mode-btn {
+            color: #b0b0b0;
+        }
+
+        /* Timer for Quiz Mode */
+        .quiz-timer {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #f44336;
+            text-align: center;
+            margin: 10px 0;
+            display: none;
+        }
+
+        .quiz-timer.visible {
+            display: block;
+        }
+
+        .quiz-timer.warning {
+            animation: pulse 0.5s infinite;
+            color: #d32f2f;
+        }
+
+        /* Sound Toggle Icon */
+        .sound-icon {
+            font-size: 1.2em;
+        }
     </style>
 </head>
 <body>
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Confetti Container -->
+    <div id="confettiContainer" class="confetti-container"></div>
+
     <div class="container">
         <h1>⚾ 2nd Grade Math Games ⚾</h1>
         <p class="subtitle">Step up to the plate and master math skills!</p>
+
+        <!-- Settings Bar -->
+        <div class="settings-bar">
+            <button id="darkModeBtn" class="settings-btn" aria-label="Toggle dark mode">
+                <span class="sound-icon">🌙</span> Dark Mode
+            </button>
+            <button id="soundBtn" class="settings-btn active" aria-label="Toggle sound">
+                <span class="sound-icon">🔊</span> Sound
+            </button>
+        </div>
+
+        <!-- Progress Dashboard -->
+        <div class="progress-dashboard" id="progressDashboard">
+            <h3 class="progress-title">📊 Your Progress</h3>
+            <div class="progress-stats">
+                <div class="stat-item">
+                    <span class="stat-value" id="gamesPlayedStat">0</span>
+                    <span class="stat-label">Games Played</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="totalScoreStat">0</span>
+                    <span class="stat-label">Total Points</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="streakStat">0</span>
+                    <span class="stat-label">🔥 Streak</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="perfectGamesStat">0</span>
+                    <span class="stat-label">⭐ Perfect Games</span>
+                </div>
+            </div>
+        </div>
 
         <!-- Main Menu -->
         <nav id="mainMenu" class="games-grid" role="navigation" aria-label="Math Games Menu">
@@ -1496,6 +1934,365 @@
     </div>
 
     <script>
+        // ========== NEW FEATURES: Settings & Utilities ==========
+
+        // App Settings (persisted in localStorage)
+        const AppSettings = {
+            darkMode: false,
+            soundEnabled: true,
+            difficulty: 'medium', // 'easy', 'medium', 'hard'
+            gameMode: 'practice' // 'practice', 'quiz'
+        };
+
+        // Player Stats (persisted in localStorage)
+        const PlayerStats = {
+            gamesPlayed: 0,
+            totalScore: 0,
+            streak: 0,
+            perfectGames: 0,
+            highScores: {
+                builder: 0,
+                bingo: 0,
+                concession: 0,
+                equipment: 0,
+                walkathon: 0,
+                compare: 0,
+                oddEven: 0,
+                partialSums: 0,
+                countBack: 0
+            },
+            lastPlayDate: null
+        };
+
+        // Difficulty Ranges
+        const DifficultyRanges = {
+            easy: { min: 10, max: 99, questions: 5 },
+            medium: { min: 100, max: 499, questions: 8 },
+            hard: { min: 100, max: 999, questions: 10 }
+        };
+
+        // Audio Context for sound effects
+        let audioContext = null;
+
+        // ========== LOCAL STORAGE FUNCTIONS ==========
+        function saveSettings() {
+            localStorage.setItem('mathGames_settings', JSON.stringify(AppSettings));
+        }
+
+        function loadSettings() {
+            const saved = localStorage.getItem('mathGames_settings');
+            if (saved) {
+                Object.assign(AppSettings, JSON.parse(saved));
+            }
+            applySettings();
+        }
+
+        function saveStats() {
+            localStorage.setItem('mathGames_stats', JSON.stringify(PlayerStats));
+        }
+
+        function loadStats() {
+            const saved = localStorage.getItem('mathGames_stats');
+            if (saved) {
+                Object.assign(PlayerStats, JSON.parse(saved));
+            }
+            updateProgressDashboard();
+            updateHighScoreBadges();
+        }
+
+        function applySettings() {
+            // Apply dark mode
+            if (AppSettings.darkMode) {
+                document.body.classList.add('dark-mode');
+                document.getElementById('darkModeBtn').classList.add('active');
+                document.getElementById('darkModeBtn').innerHTML = '<span class="sound-icon">☀️</span> Light Mode';
+            } else {
+                document.body.classList.remove('dark-mode');
+                document.getElementById('darkModeBtn').classList.remove('active');
+                document.getElementById('darkModeBtn').innerHTML = '<span class="sound-icon">🌙</span> Dark Mode';
+            }
+
+            // Apply sound setting
+            const soundBtn = document.getElementById('soundBtn');
+            if (AppSettings.soundEnabled) {
+                soundBtn.classList.add('active');
+                soundBtn.innerHTML = '<span class="sound-icon">🔊</span> Sound';
+            } else {
+                soundBtn.classList.remove('active');
+                soundBtn.innerHTML = '<span class="sound-icon">🔇</span> Sound';
+            }
+        }
+
+        // ========== PROGRESS DASHBOARD ==========
+        function updateProgressDashboard() {
+            document.getElementById('gamesPlayedStat').textContent = PlayerStats.gamesPlayed;
+            document.getElementById('totalScoreStat').textContent = PlayerStats.totalScore;
+            document.getElementById('streakStat').textContent = PlayerStats.streak;
+            document.getElementById('perfectGamesStat').textContent = PlayerStats.perfectGames;
+        }
+
+        function updateHighScoreBadges() {
+            const gameIds = ['builder', 'bingo', 'concession', 'equipment', 'walkathon', 'compare', 'oddEven', 'partialSums', 'countBack'];
+            gameIds.forEach(gameId => {
+                const card = document.getElementById(gameId + 'Card');
+                const highScore = PlayerStats.highScores[gameId];
+
+                // Remove existing badge
+                const existingBadge = card.querySelector('.high-score-badge');
+                if (existingBadge) existingBadge.remove();
+
+                // Add badge if high score exists
+                if (highScore > 0) {
+                    const badge = document.createElement('div');
+                    badge.className = 'high-score-badge';
+                    badge.textContent = '⭐ ' + highScore;
+                    card.appendChild(badge);
+                }
+            });
+        }
+
+        function recordGameComplete(gameId, score, maxScore) {
+            PlayerStats.gamesPlayed++;
+            PlayerStats.totalScore += score;
+
+            // Check for new high score
+            if (score > PlayerStats.highScores[gameId]) {
+                PlayerStats.highScores[gameId] = score;
+                playSound('highScore');
+            }
+
+            // Check for perfect game
+            if (score === maxScore) {
+                PlayerStats.perfectGames++;
+                PlayerStats.streak++;
+                triggerConfetti();
+            } else {
+                PlayerStats.streak = 0;
+            }
+
+            PlayerStats.lastPlayDate = new Date().toISOString();
+            saveStats();
+            updateProgressDashboard();
+            updateHighScoreBadges();
+        }
+
+        // ========== SOUND EFFECTS ==========
+        function initAudio() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        function playSound(type) {
+            if (!AppSettings.soundEnabled) return;
+
+            try {
+                initAudio();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+
+                switch(type) {
+                    case 'correct':
+                        oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // C5
+                        oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.1); // E5
+                        oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.2); // G5
+                        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.4);
+                        oscillator.start(audioContext.currentTime);
+                        oscillator.stop(audioContext.currentTime + 0.4);
+                        break;
+                    case 'incorrect':
+                        oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+                        oscillator.frequency.setValueAtTime(150, audioContext.currentTime + 0.1);
+                        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                        oscillator.start(audioContext.currentTime);
+                        oscillator.stop(audioContext.currentTime + 0.3);
+                        break;
+                    case 'click':
+                        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+                        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.05);
+                        oscillator.start(audioContext.currentTime);
+                        oscillator.stop(audioContext.currentTime + 0.05);
+                        break;
+                    case 'highScore':
+                        // Fanfare sound
+                        const notes = [523.25, 659.25, 783.99, 1046.50];
+                        notes.forEach((freq, i) => {
+                            const osc = audioContext.createOscillator();
+                            const gain = audioContext.createGain();
+                            osc.connect(gain);
+                            gain.connect(audioContext.destination);
+                            osc.frequency.setValueAtTime(freq, audioContext.currentTime + i * 0.15);
+                            gain.gain.setValueAtTime(0.2, audioContext.currentTime + i * 0.15);
+                            gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + i * 0.15 + 0.3);
+                            osc.start(audioContext.currentTime + i * 0.15);
+                            osc.stop(audioContext.currentTime + i * 0.15 + 0.3);
+                        });
+                        return;
+                    case 'gameStart':
+                        oscillator.frequency.setValueAtTime(440, audioContext.currentTime);
+                        oscillator.frequency.setValueAtTime(550, audioContext.currentTime + 0.1);
+                        oscillator.frequency.setValueAtTime(660, audioContext.currentTime + 0.2);
+                        gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.4);
+                        oscillator.start(audioContext.currentTime);
+                        oscillator.stop(audioContext.currentTime + 0.4);
+                        break;
+                }
+            } catch (e) {
+                console.log('Audio not supported');
+            }
+        }
+
+        // ========== CONFETTI ANIMATION ==========
+        function triggerConfetti() {
+            const container = document.getElementById('confettiContainer');
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffa500', '#ff69b4'];
+
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+
+                // Random shapes
+                const shapes = ['circle', 'square', 'triangle'];
+                const shape = shapes[Math.floor(Math.random() * shapes.length)];
+                if (shape === 'circle') {
+                    confetti.style.borderRadius = '50%';
+                } else if (shape === 'triangle') {
+                    confetti.style.width = '0';
+                    confetti.style.height = '0';
+                    confetti.style.borderLeft = '5px solid transparent';
+                    confetti.style.borderRight = '5px solid transparent';
+                    confetti.style.borderBottom = '10px solid ' + confetti.style.backgroundColor;
+                    confetti.style.backgroundColor = 'transparent';
+                }
+
+                container.appendChild(confetti);
+            }
+
+            // Clean up confetti after animation
+            setTimeout(() => {
+                container.innerHTML = '';
+            }, 5000);
+        }
+
+        // ========== LOADING STATE ==========
+        function showLoading() {
+            document.getElementById('loadingOverlay').classList.add('visible');
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingOverlay').classList.remove('visible');
+        }
+
+        // ========== HINT SYSTEM ==========
+        let currentHint = '';
+        let hintsUsed = 0;
+        const maxHints = 3;
+
+        function showHint(hintText) {
+            if (AppSettings.gameMode === 'quiz') return; // No hints in quiz mode
+
+            if (hintsUsed >= maxHints) {
+                alert('You\'ve used all your hints for this game!');
+                return;
+            }
+
+            hintsUsed++;
+            const hintBoxes = document.querySelectorAll('.hint-box');
+            hintBoxes.forEach(box => {
+                box.textContent = '💡 Hint: ' + hintText;
+                box.classList.add('visible');
+            });
+
+            // Update hint buttons
+            document.querySelectorAll('.hint-btn').forEach(btn => {
+                btn.textContent = `💡 Hint (${maxHints - hintsUsed} left)`;
+                if (hintsUsed >= maxHints) btn.disabled = true;
+            });
+        }
+
+        function resetHints() {
+            hintsUsed = 0;
+            document.querySelectorAll('.hint-box').forEach(box => {
+                box.classList.remove('visible');
+                box.textContent = '';
+            });
+            document.querySelectorAll('.hint-btn').forEach(btn => {
+                btn.textContent = `💡 Hint (${maxHints} left)`;
+                btn.disabled = false;
+            });
+        }
+
+        // ========== QUIZ MODE TIMER ==========
+        let quizTimer = null;
+        let quizTimeLeft = 0;
+
+        function startQuizTimer(seconds, timerElementId, onTimeUp) {
+            if (AppSettings.gameMode !== 'quiz') return;
+
+            quizTimeLeft = seconds;
+            const timerEl = document.getElementById(timerElementId);
+            if (timerEl) {
+                timerEl.classList.add('visible');
+                updateTimerDisplay(timerEl);
+            }
+
+            quizTimer = setInterval(() => {
+                quizTimeLeft--;
+                if (timerEl) {
+                    updateTimerDisplay(timerEl);
+                    if (quizTimeLeft <= 10) {
+                        timerEl.classList.add('warning');
+                    }
+                }
+
+                if (quizTimeLeft <= 0) {
+                    clearInterval(quizTimer);
+                    if (onTimeUp) onTimeUp();
+                }
+            }, 1000);
+        }
+
+        function stopQuizTimer() {
+            if (quizTimer) {
+                clearInterval(quizTimer);
+                quizTimer = null;
+            }
+            document.querySelectorAll('.quiz-timer').forEach(el => {
+                el.classList.remove('visible', 'warning');
+            });
+        }
+
+        function updateTimerDisplay(el) {
+            const mins = Math.floor(quizTimeLeft / 60);
+            const secs = quizTimeLeft % 60;
+            el.textContent = `⏱️ ${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // ========== DIFFICULTY HELPERS ==========
+        function getNumberRange() {
+            return DifficultyRanges[AppSettings.difficulty];
+        }
+
+        function getRandomInRange() {
+            const range = getNumberRange();
+            return Math.floor(Math.random() * (range.max - range.min + 1)) + range.min;
+        }
+
+        function getQuestionCount() {
+            return DifficultyRanges[AppSettings.difficulty].questions;
+        }
+
         // Global game variables
         let builderDice = [0, 0, 0];
         let currentDiceIndex = 0;
@@ -1637,6 +2434,30 @@
 
         // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
+            // ========== INITIALIZE NEW FEATURES ==========
+
+            // Load saved settings and stats
+            loadSettings();
+            loadStats();
+
+            // Dark Mode Toggle
+            document.getElementById('darkModeBtn').addEventListener('click', function() {
+                AppSettings.darkMode = !AppSettings.darkMode;
+                applySettings();
+                saveSettings();
+                playSound('click');
+            });
+
+            // Sound Toggle
+            document.getElementById('soundBtn').addEventListener('click', function() {
+                AppSettings.soundEnabled = !AppSettings.soundEnabled;
+                applySettings();
+                saveSettings();
+                if (AppSettings.soundEnabled) playSound('click');
+            });
+
+            // ========== END NEW FEATURES INIT ==========
+
             // Main menu navigation with click and keyboard support
             const gameCards = [
                 { id: 'builderCard', game: 'builder' },
@@ -2354,12 +3175,15 @@
         function showWalkathonResults() {
             document.getElementById('walkathonGame').style.display = 'none';
             document.getElementById('walkathonResults').style.display = 'block';
-            
+
             document.getElementById('walkathonFinalName').textContent = walkathonPlayerName;
             document.getElementById('walkathonFinalScore').textContent = walkathonScore;
-            
+
             const percentage = Math.round((walkathonScore / walkathonQuestions.length) * 100);
-            
+
+            // Record game completion
+            recordGameComplete('walkathon', walkathonScore, walkathonQuestions.length);
+
             if (percentage >= 75) {
                 document.getElementById('walkathonResultsEmoji').textContent = '🏆';
                 document.getElementById('walkathonResultsMessage').textContent = "Excellent! You're a number line champion!";
@@ -2471,9 +3295,11 @@
                 document.getElementById('compareScore').textContent = compareScore;
                 feedback.textContent = `⚾ Home Run! ${compareNum1} ${compareCorrectSymbol} ${compareNum2} is correct!`;
                 feedback.className = 'feedback success';
+                playSound('correct');
             } else {
                 feedback.textContent = `❌ Strike out! The correct answer is ${compareNum1} ${compareCorrectSymbol} ${compareNum2}`;
                 feedback.className = 'feedback error';
+                playSound('incorrect');
             }
             
             feedback.style.display = 'block';
@@ -2499,15 +3325,18 @@
             document.getElementById('compareFeedback').style.display = 'none';
             document.getElementById('compareNextBtn').style.display = 'none';
             document.querySelectorAll('.compare-btn').forEach(btn => btn.parentElement.style.display = 'none');
-            
+
             // Show results
             const results = document.getElementById('compareResults');
             results.style.display = 'block';
-            
+
             document.getElementById('compareFinalScore').textContent = compareScore;
-            
+
             const percentage = Math.round((compareScore / compareTotalQuestions) * 100);
-            
+
+            // Record game completion with stats
+            recordGameComplete('compare', compareScore, compareTotalQuestions);
+
             if (percentage >= 90) {
                 document.getElementById('compareResultsEmoji').textContent = '🏆';
                 document.getElementById('compareResultsMessage').textContent = "Perfect game! You're a comparison champion!";
@@ -2611,10 +3440,12 @@
                 const lastDigit = oddEvenCurrentNumber % 10;
                 feedback.innerHTML = `⚾ Home Run! ${oddEvenCurrentNumber} is ${correctType.toUpperCase()}!<br><small>It ends in ${lastDigit}, which is an ${correctType} number.</small>`;
                 feedback.className = 'feedback success';
+                playSound('correct');
             } else {
                 const lastDigit = oddEvenCurrentNumber % 10;
                 feedback.innerHTML = `❌ Strike out! ${oddEvenCurrentNumber} is ${correctType.toUpperCase()}, not ${selectedType}!<br><small>Look at the last digit: ${lastDigit} is an ${correctType} number.</small>`;
                 feedback.className = 'feedback error';
+                playSound('incorrect');
             }
             
             feedback.style.display = 'block';
@@ -2687,14 +3518,17 @@
             document.getElementById('oddEvenVisual').style.display = 'none';
             document.querySelectorAll('.odd-even-btn').forEach(btn => btn.style.display = 'none');
             document.getElementById('oddEvenNumber').parentElement.parentElement.style.display = 'none';
-            
+
             // Show results
             const results = document.getElementById('oddEvenResults');
             results.style.display = 'block';
-            
+
             document.getElementById('oddEvenFinalScore').textContent = oddEvenScore;
-            
+
             const percentage = Math.round((oddEvenScore / oddEvenTotalQuestions) * 100);
+
+            // Record game completion
+            recordGameComplete('oddEven', oddEvenScore, oddEvenTotalQuestions);
             
             if (percentage >= 90) {
                 document.getElementById('oddEvenResultsEmoji').textContent = '🏆';
@@ -2938,15 +3772,18 @@
             document.getElementById('psNextProblemBtn').style.display = 'none';
             document.getElementById('partialSumsFeedback').style.display = 'none';
             document.getElementById('partialSumsProblem').parentElement.style.display = 'none';
-            
+
             // Show results
             const results = document.getElementById('partialSumsResults');
             results.style.display = 'block';
-            
+
             document.getElementById('partialSumsFinalScore').textContent = partialSumsScore;
-            
+
             const percentage = Math.round((partialSumsScore / partialSumsTotalQuestions) * 100);
-            
+
+            // Record game completion
+            recordGameComplete('partialSums', partialSumsScore, partialSumsTotalQuestions);
+
             if (percentage >= 80) {
                 document.getElementById('partialSumsResultsEmoji').textContent = '🏆';
                 document.getElementById('partialSumsResultsMessage').textContent = "Amazing! You're a partial sums superstar!";
@@ -3213,13 +4050,16 @@
             document.getElementById('cbNextProblemBtn').style.display = 'none';
             document.getElementById('countBackFeedback').style.display = 'none';
             document.getElementById('countBackProblem').parentElement.style.display = 'none';
-            
+
             const results = document.getElementById('countBackResults');
             results.style.display = 'block';
-            
+
             document.getElementById('countBackFinalScore').textContent = countBackScore;
-            
+
             const percentage = Math.round((countBackScore / countBackTotalQuestions) * 100);
+
+            // Record game completion
+            recordGameComplete('countBack', countBackScore, countBackTotalQuestions);
             
             if (percentage >= 80) {
                 document.getElementById('countBackResultsEmoji').textContent = '🏆';
