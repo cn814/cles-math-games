@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2nd Grade Math Games - Baseball Edition</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>⚾ 2nd Grade Math Games ⚾</h1>
+        <p class="subtitle">Step up to the plate and master math skills!</p>
+
+        <!-- Main Menu -->
+        <div id="mainMenu" class="games-grid">
+            <div class="game-card" id="builderCard">
+                <h3>⚾ Home Run Derby</h3>
+                <p>Hit dice around the bases to build the biggest score!</p>
+            </div>
+            <div class="game-card" id="bingoCard">
+                <h3>🎯 Stadium Bingo</h3>
+                <p>Find your seat based on place value clues!</p>
+            </div>
+            <div class="game-card" id="concessionCard">
+                <h3>🍿 Concession Stand</h3>
+                <p>Buy baseball snacks with $100, $10, and $1 bills!</p>
+            </div>
+            <div class="game-card" id="equipmentCard">
+                <h3>🧤 Equipment Counter</h3>
+                <p>Count gloves, bats, and balls to find the total!</p>
+            </div>
+            <div class="game-card" id="walkathonCard">
+                <h3>🚶‍♂️ Walk-A-Thon Challenge</h3>
+                <p>Help track the walking progress with number line skills!</p>
+            </div>
+            <div class="game-card" id="compareCard">
+                <h3>⚖️ Scoreboard Showdown</h3>
+                <p>Compare team scores and pick the right symbol!</p>
+            </div>
+            <div class="game-card" id="oddEvenCard">
+                <h3>🎯 Odd or Even Ballpark</h3>
+                <p>Sort the numbers into odd and even teams!</p>
+            </div>
+        </div>
+
+        <!-- Home Run Derby Game -->
+        <div class="game-area" id="builder">
+            <button class="back-btn" id="builderBackBtn">← Back to Games</button>
+            <h2 style="text-align: center; color: #1976d2;">⚾ Home Run Derby</h2>
+            <p style="text-align: center; font-size: 1.2em;">Roll the dice and run the bases to build the biggest score!
+            </p>
+
+            <div class="diamond-container">
+                <div class="base" id="dice1">?</div>
+                <div class="base" id="dice2">?</div>
+                <div class="base" id="dice3">?</div>
+            </div>
+
+            <div style="text-align: center;">
+                <button class="btn btn-primary" id="rollBtn">⚾ Play Ball!</button>
+            </div>
+
+            <div class="bases">
+                <div class="base-slot" data-place="hundreds">
+                    <span>Home Plate</span>
+                    <small>×100</small>
+                </div>
+                <div class="base-slot" data-place="tens">
+                    <span>First Base</span>
+                    <small>×10</small>
+                </div>
+                <div class="base-slot" data-place="ones">
+                    <span>Second Base</span>
+                    <small>×1</small>
+                </div>
+            </div>
+
+            <div class="scoreboard-display" id="numberDisplay">Click "Play Ball!" to start!</div>
+        </div>
+
+        <!-- Stadium Bingo Game -->
+        <div class="game-area" id="bingo">
+            <button class="back-btn" id="bingoBackBtn">← Back to Games</button>
+            <h2 style="text-align: center; color: #1976d2;">🎯 Stadium Bingo</h2>
+            <p style="text-align: center; font-size: 1.2em;">Find your seat in the stadium using place value clues!</p>
+
+            <div class="announcer-booth" id="callDisplay">Click "Next Announcement" to start!</div>
+
+            <div class="stadium-grid" id="bingoGrid"></div>
+
+            <div style="text-align: center;">
+                <button class="btn btn-primary" id="nextCallBtn">📢 Next Announcement</button>
+                <button class="btn btn-secondary" id="resetBingoBtn">🔄 New Stadium</button>
+            </div>
+
+            <div id="bingoFeedback" class="feedback" style="display: none;"></div>
+        </div>
+
+        <!-- Concession Stand Game -->
+        <div class="game-area" id="concession">
+            <button class="back-btn" id="concessionBackBtn">← Back to Games</button>
+            <h2 style="text-align: center; color: #1976d2;">🍿 Concession Stand</h2>
+            <p style="text-align: center; font-size: 1.2em;">Buy delicious ballpark snacks with your money!</p>
+
+            <!-- Concession Product -->
+            <div id="concessionProduct"
+                style="background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%); border-radius: 20px; padding: 30px; margin: 20px 0; text-align: center; color: white; border: 3px solid #8b4513;">
+                <div id="productEmoji" style="font-size: 6em; margin-bottom: 10px;">🍿</div>
+                <h3 id="productName" style="font-size: 2em; margin: 10px 0;">Ballpark Popcorn!</h3>
+                <p id="productDescription" style="font-size: 1.2em; margin: 10px 0;">Fresh, buttery stadium popcorn!</p>
+                <div id="productRarity"
+                    style="background: rgba(255,255,255,0.3); border-radius: 10px; padding: 10px; margin: 10px 0; font-size: 1.1em; font-weight: bold;">
+                </div>
+                <div style="background: rgba(255,255,255,0.2); border-radius: 15px; padding: 15px; margin: 20px 0;">
+                    <div style="font-size: 3em; font-weight: bold;" id="concessionPrice">$247</div>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <button class="btn btn-warning" id="ticketBtn">🎫 Open Wallet</button>
+            </div>
+
+            <!-- Total Money Display -->
+            <div class="cash-register">
+                <h3>💰 Your Money</h3>
+                <div class="total-amount" id="totalMoney">$0</div>
+            </div>
+
+            <div style="text-align: center;">
+                <button class="btn btn-success" id="checkPurchaseBtn">✅ Buy Snack</button>
+            </div>
+
+            <!-- Feedback -->
+            <div id="concessionFeedback" class="feedback" style="display: none;"></div>
+
+            <!-- Reset Button -->
+            <button class="btn btn-secondary" id="resetConcessionBtn" style="display: block; margin: 20px auto;">🔄 New
+                Snack</button>
+        </div>
+
+        <!-- Equipment Counter Game -->
+        <div class="game-area" id="equipment">
+            <button class="back-btn" id="equipmentBackBtn">← Back to Games</button>
+            <h2 style="text-align: center; color: #1976d2;">🧤 Equipment Counter</h2>
+            <p style="text-align: center; font-size: 1.2em;">Count all the baseball equipment!</p>
+
+            <!-- Legend -->
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-block" style="background: #ff9800; border-radius: 8px;"></div>
+                    <span>Gloves (100)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-block" style="background: #6d4c41; border-radius: 8px;"></div>
+                    <span>Bats (10)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-block" style="background: #f5f5f5; border-radius: 50%;"></div>
+                    <span>Balls (1)</span>
+                </div>
+            </div>
+
+            <!-- Equipment Display -->
+            <div class="equipment-container" id="equipmentContainer"></div>
+
+            <!-- Answer Input -->
+            <div style="text-align: center; margin: 20px 0;">
+                <input type="number" class="answer-input" id="equipmentAnswer" placeholder="Total equipment count"
+                    onkeypress="if(event.key==='Enter') checkEquipmentAnswer()">
+            </div>
+
+            <div style="text-align: center;">
+                <button class="btn btn-primary" id="checkAnswerBtn">✅ Count Equipment</button>
+                <button class="btn btn-secondary" id="newProblemBtn">🔄 New Game</button>
+            </div>
+
+            <div id="equipmentFeedback" class="feedback" style="display: none;"></div>
+        </div>
+
+        <!-- Walk-A-Thon Game -->
+        <div class="game-area" id="walkathon">
+            <button class="back-btn" id="walkathonBackBtn">← Back to Games</button>
+            <h2 style="text-align: center; color: #1976d2;">🚶‍♂️ Walk-A-Thon Challenge</h2>
+            <p style="text-align: center; font-size: 1.2em;">Help Mr. Monjes track the 2nd graders' walking progress!
+            </p>
+
+            <!-- Start Screen for Walkathon -->
+            <div id="walkathonStart"
+                style="text-align: center; background: #f8f9fa; padding: 30px; border-radius: 15px; margin: 20px 0;">
+                <h3 style="color: #2e7d32; margin-bottom: 20px;">🚶‍♂️ Walk-A-Thon Game! 🚶‍♀️</h3>
+                <p style="font-size: 1.2em; margin-bottom: 20px;">Practice number line skills and addition!</p>
+                <label for="walkathonName" style="font-size: 1.1em; font-weight: bold; color: #333;">What's your name,
+                    walker?</label>
+                <br>
+                <input type="text" id="walkathonName"
+                    style="padding: 10px; font-size: 1.1em; border: 3px solid #4caf50; border-radius: 8px; margin: 15px 0; text-align: center; width: 250px;"
+                    placeholder="Enter your name" maxlength="20">
+                <br>
+                <button id="startWalkathonBtn" class="btn btn-success" disabled>Start Walking! 🎯</button>
+            </div>
+
+            <!-- Game Screen -->
+            <div id="walkathonGame" style="display: none;">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <span id="walkathonQuestionNum" style="font-size: 1.1em; color: #666;">Question 1 of 4</span>
+                </div>
+                <div
+                    style="text-align: center; font-size: 1.3em; color: #2e7d32; font-weight: bold; margin-bottom: 20px;">
+                    Score: <span id="walkathonScore">0</span>/4
+                </div>
+
+                <!-- Number Line -->
+                <div
+                    style="background: #e3f2fd; padding: 30px; margin: 30px 0; border-radius: 15px; position: relative;">
+                    <div
+                        style="position: absolute; top: -10px; left: -10px; font-size: 30px; animation: bounce 2s infinite;">
+                        🚶‍➡️</div>
+                    <div
+                        style="height: 8px; background: #666; border-radius: 4px; position: relative; margin-bottom: 40px;">
+                    </div>
+                    <div style="display: flex; justify-content: space-between; position: relative;"
+                        id="walkathonNumberLine">
+                        <!-- Number line marks will be generated by JavaScript -->
+                    </div>
+                    <p style="text-align: center; color: #666; margin-top: 20px; font-weight: bold;">Walk-A-Thon
+                        Progress: 0 to 500 miles!</p>
+                </div>
+
+                <!-- Question Section -->
+                <div
+                    style="background: #fff; border-radius: 15px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <div style="font-size: 1.4em; color: #333; margin-bottom: 30px; text-align: center; line-height: 1.4;"
+                        id="walkathonQuestion"></div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px;"
+                        id="walkathonOptions"></div>
+                    <div id="walkathonFeedback"
+                        style="background: #e3f2fd; border-left: 5px solid #2196f3; padding: 20px; margin: 20px 0; border-radius: 0 10px 10px 0; display: none;">
+                        <div style="font-size: 1.3em; font-weight: bold; margin-bottom: 10px;"
+                            id="walkathonFeedbackTitle"></div>
+                        <div style="font-size: 1.1em; color: #555;" id="walkathonFeedbackText"></div>
+                    </div>
+                    <button id="walkathonNextBtn" class="btn btn-success" style="width: 100%; display: none;">Next
+                        Question 👟</button>
+                </div>
+            </div>
+
+            <!-- Results Screen -->
+            <div id="walkathonResults" style="display: none;">
+                <div
+                    style="text-align: center; background: linear-gradient(135deg, #fff9c4 0%, #c8e6c9 100%); padding: 40px; border-radius: 20px;">
+                    <h2 style="color: #2e7d32; margin-bottom: 20px;">🎉 Great Job, <span
+                            id="walkathonFinalName"></span>! 🎉</h2>
+                    <div style="font-size: 80px; margin: 20px 0;" id="walkathonResultsEmoji"></div>
+                    <div style="font-size: 1.4em; color: #2e7d32; margin-bottom: 30px; line-height: 1.4;">
+                        <p style="font-size: 1.5em; margin-bottom: 15px;">You scored <span
+                                id="walkathonFinalScore"></span> out of 4!</p>
+                        <p id="walkathonResultsMessage"></p>
+                    </div>
+                    <button id="walkathonRestartBtn" class="btn btn-primary">Walk Again! 🚶‍♂️</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scoreboard Showdown (Number Comparison) Game -->
+        <div class="game-area" id="compare">
+            <button class="back-btn" id="compareBackBtn">← Back to Games</button>
+            <h2 style="text-align: center; color: #1976d2;">⚖️ Scoreboard Showdown</h2>
+            <p style="text-align: center; font-size: 1.2em;">Compare the scores and choose the correct symbol!</p>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <span id="compareQuestionNum" style="font-size: 1.1em; color: #666;">Question 1 of 10</span>
+            </div>
+
+            <div style="text-align: center; font-size: 1.3em; color: #2e7d32; font-weight: bold; margin-bottom: 20px;">
+                Score: <span id="compareScore">0</span>/10
+            </div>
+
+            <!-- Scoreboard Display -->
+            <div
+                style="display: flex; justify-content: center; align-items: center; gap: 30px; margin: 40px 0; flex-wrap: wrap;">
+                <!-- Team 1 Scoreboard -->
+                <div
+                    style="background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%); border: 3px solid #8b4513; border-radius: 15px; padding: 30px; min-width: 200px; box-shadow: 0 8px 20px rgba(0,0,0,0.2);">
+                    <div style="color: white; font-size: 1.2em; margin-bottom: 10px; font-weight: bold;">🏆 Team Blue
+                    </div>
+                    <div style="background: #000; color: #00ff00; font-size: 4em; font-weight: bold; padding: 20px; border-radius: 10px; font-family: 'Courier New', monospace;"
+                        id="compareNum1">0</div>
+                </div>
+
+                <!-- Comparison Symbol Placeholder -->
+                <div style="font-size: 5em; color: #ff4444; font-weight: bold;">?</div>
+
+                <!-- Team 2 Scoreboard -->
+                <div
+                    style="background: linear-gradient(135deg, #d32f2f 0%, #f44336 100%); border: 3px solid #8b4513; border-radius: 15px; padding: 30px; min-width: 200px; box-shadow: 0 8px 20px rgba(0,0,0,0.2);">
+                    <div style="color: white; font-size: 1.2em; margin-bottom: 10px; font-weight: bold;">🏆 Team Red
+                    </div>
+                    <div style="background: #000; color: #00ff00; font-size: 4em; font-weight: bold; padding: 20px; border-radius: 10px; font-family: 'Courier New', monospace;"
+                        id="compareNum2">0</div>
+                </div>
+            </div>
+
+            <!-- Symbol Choices -->
+            <div style="text-align: center; margin: 40px 0;">
+                <p style="font-size: 1.3em; color: #333; margin-bottom: 20px; font-weight: bold;">Which symbol belongs
+                    between the scores?</p>
+                <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                    <button class="compare-btn" data-symbol="<"
+                        style="background: #e3f2fd; border: 4px solid #1976d2; color: #1976d2; padding: 30px 50px; font-size: 3em; font-weight: bold; border-radius: 15px; cursor: pointer; transition: all 0.3s; min-width: 120px;">
+                        <div style="font-size: 0.3em; margin-bottom: 5px;">Less Than</div>
+                        &lt;
+                    </button>
+                    <button class="compare-btn" data-symbol="="
+                        style="background: #fff9c4; border: 4px solid #f57c00; color: #f57c00; padding: 30px 50px; font-size: 3em; font-weight: bold; border-radius: 15px; cursor: pointer; transition: all 0.3s; min-width: 120px;">
+                        <div style="font-size: 0.3em; margin-bottom: 5px;">Equal To</div>
+                        =
+                    </button>
+                    <button class="compare-btn" data-symbol=">"
+                        style="background: #ffcdd2; border: 4px solid #d32f2f; color: #d32f2f; padding: 30px 50px; font-size: 3em; font-weight: bold; border-radius: 15px; cursor: pointer; transition: all 0.3s; min-width: 120px;">
+                        <div style="font-size: 0.3em; margin-bottom: 5px;">Greater Than</div>
+                        &gt;
+                    </button>
+                </div>
+            </div>
+
+            <!-- Feedback -->
+            <div id="compareFeedback" class="feedback" style="display: none;"></div>
+
+            <!-- Next Button (hidden initially) -->
+            <div style="text-align: center;">
+                <button id="compareNextBtn" class="btn btn-success" style="display: none; font-size: 1.3em;">Next
+                    Question ⚾</button>
+            </div>
+
+            <!-- Results Screen -->
+            <div id="compareResults"
+                style="display: none; text-align: center; background: linear-gradient(135deg, #fff9c4 0%, #c8e6c9 100%); padding: 40px; border-radius: 20px; margin-top: 30px;">
+                <h2 style="color: #2e7d32; margin-bottom: 20px;">🎉 Game Complete! 🎉</h2>
+                <div style="font-size: 80px; margin: 20px 0;" id="compareResultsEmoji"></div>
+                <div style="font-size: 1.4em; color: #2e7d32; margin-bottom: 30px; line-height: 1.4;">
+                    <p style="font-size: 1.5em; margin-bottom: 15px;">You scored <span id="compareFinalScore"></span>
+                        out of 10!</p>
+                    <p id="compareResultsMessage"></p>
+                </div>
+                <button id="compareRestartBtn" class="btn btn-primary" style="font-size: 1.3em;">Play Again! ⚖️</button>
+            </div>
+        </div>
+
+        <!-- Odd or Even Ballpark Game -->
+        <div class="game-area" id="oddEven">
+            <button class="back-btn" id="oddEvenBackBtn">← Back to Games</button>
+            <h2 style="text-align: center; color: #1976d2; margin: 10px 0;">🎯 Odd or Even Ballpark</h2>
+
+            <!-- Compact layout with everything visible -->
+            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 15px; align-items: start;">
+
+                <!-- Left Column: Info and Score -->
+                <div>
+                    <!-- Score Display -->
+                    <div style="text-align: center; margin-bottom: 10px;">
+                        <div
+                            style="background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%); padding: 8px 15px; border-radius: 10px; border: 2px solid #388e3c;">
+                            <span style="font-size: 1.1em; color: #2e7d32; font-weight: bold;">Score: <span
+                                    id="oddEvenScore">0</span>/10</span>
+                        </div>
+                    </div>
+
+                    <!-- Info Box explaining odd/even -->
+                    <div style="background: #fff3e0; border: 2px solid #f57c00; border-radius: 10px; padding: 10px;">
+                        <h4 style="color: #e65100; margin: 0 0 8px 0; text-align: center; font-size: 1em;">📚 Remember:
+                        </h4>
+                        <div
+                            style="background: #e3f2fd; padding: 8px; border-radius: 8px; border: 2px solid #1976d2; margin-bottom: 8px;">
+                            <div style="color: #1976d2; font-weight: bold; font-size: 0.9em; margin-bottom: 3px;">🔵
+                                EVEN</div>
+                            <div style="margin: 2px 0; font-size: 0.85em;">Ends in: <strong>0, 2, 4, 6, 8</strong></div>
+                        </div>
+                        <div style="background: #ffebee; padding: 8px; border-radius: 8px; border: 2px solid #d32f2f;">
+                            <div style="color: #d32f2f; font-weight: bold; font-size: 0.9em; margin-bottom: 3px;">🔴 ODD
+                            </div>
+                            <div style="margin: 2px 0; font-size: 0.85em;">Ends in: <strong>1, 3, 5, 7, 9</strong></div>
+                        </div>
+                    </div>
+
+                    <!-- Visual Helper - Pairs Display (Compact) -->
+                    <div id="oddEvenVisual"
+                        style="background: white; border: 2px solid #8b4513; border-radius: 10px; padding: 10px; margin-top: 10px; display: none;">
+                        <h4 style="text-align: center; color: #333; margin: 0 0 8px 0; font-size: 0.9em;">👥 Pairs</h4>
+                        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 8px;"
+                            id="oddEvenPairs"></div>
+                        <div style="text-align: center; font-size: 0.85em; font-weight: bold; color: #333;"
+                            id="oddEvenPairsText"></div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Game Area -->
+                <div>
+                    <!-- Current Number Display -->
+                    <div style="text-align: center; margin-bottom: 15px;">
+                        <div
+                            style="background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%); border: 3px solid #8b4513; border-radius: 15px; padding: 15px; display: inline-block;">
+                            <div style="color: #f57c00; font-size: 0.95em; margin-bottom: 5px; font-weight: bold;">🏃
+                                Jersey #</div>
+                            <div
+                                style="background: white; border: 2px solid #8b4513; border-radius: 10px; padding: 15px 30px; display: inline-block;">
+                                <div style="font-size: 4em; font-weight: bold; color: #1976d2; font-family: 'Courier New', monospace;"
+                                    id="oddEvenNumber">0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Team Selection Buttons -->
+                    <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 15px;">
+                        <button class="odd-even-btn" data-type="even"
+                            style="background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%); border: 3px solid #0d47a1; color: white; padding: 20px 30px; font-size: 1.1em; font-weight: bold; border-radius: 15px; cursor: pointer; transition: all 0.3s; min-width: 140px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+                            <div style="font-size: 1.8em; margin-bottom: 5px;">🔵</div>
+                            <div style="font-size: 1.1em; margin-bottom: 3px;">EVEN</div>
+                            <div style="font-size: 0.7em; opacity: 0.9;">0,2,4,6,8</div>
+                        </button>
+                        <button class="odd-even-btn" data-type="odd"
+                            style="background: linear-gradient(135deg, #d32f2f 0%, #f44336 100%); border: 3px solid #b71c1c; color: white; padding: 20px 30px; font-size: 1.1em; font-weight: bold; border-radius: 15px; cursor: pointer; transition: all 0.3s; min-width: 140px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+                            <div style="font-size: 1.8em; margin-bottom: 5px;">🔴</div>
+                            <div style="font-size: 1.1em; margin-bottom: 3px;">ODD</div>
+                            <div style="font-size: 0.7em; opacity: 0.9;">1,3,5,7,9</div>
+                        </button>
+                    </div>
+
+                    <!-- Feedback -->
+                    <div id="oddEvenFeedback" class="feedback"
+                        style="display: none; padding: 12px; margin: 10px 0; font-size: 1em;"></div>
+
+                    <!-- Next Button -->
+                    <div style="text-align: center;">
+                        <button id="oddEvenNextBtn" class="btn btn-success"
+                            style="display: none; font-size: 1.1em; padding: 12px 25px;">Next Player ⚾</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Screen -->
+            <div id="oddEvenResults"
+                style="display: none; text-align: center; background: linear-gradient(135deg, #fff9c4 0%, #c8e6c9 100%); padding: 30px; border-radius: 20px; margin-top: 20px;">
+                <h2 style="color: #2e7d32; margin-bottom: 15px; font-size: 1.8em;">🎉 Great Sorting! 🎉</h2>
+                <div style="font-size: 60px; margin: 15px 0;" id="oddEvenResultsEmoji"></div>
+                <div style="font-size: 1.2em; color: #2e7d32; margin-bottom: 20px; line-height: 1.4;">
+                    <p style="font-size: 1.3em; margin-bottom: 10px;">You scored <span id="oddEvenFinalScore"></span>
+                        out of 10!</p>
+                    <p id="oddEvenResultsMessage"></p>
+                </div>
+                <button id="oddEvenRestartBtn" class="btn btn-primary" style="font-size: 1.2em;">Sort Again! 🎯</button>
+            </div>
+        </div>
+
+        <!-- Ticket Booth Popup -->
+        <div class="ticket-overlay" id="ticketOverlay">
+            <div class="ticket-booth">
+                <h3 style="margin-top: 0;">🎫 Ticket Booth</h3>
+
+                <!-- Concession Price Display in Wallet -->
+                <div
+                    style="background: rgba(25, 118, 210, 0.1); border: 2px solid #1976d2; border-radius: 10px; padding: 15px; margin-bottom: 20px;">
+                    <h4 style="margin: 0 0 5px 0; color: #1976d2;">🍿 Snack Price:</h4>
+                    <div style="font-size: 1.8em; font-weight: bold; color: #1976d2;" id="ticketConcessionPrice">$0
+                    </div>
+                </div>
+
+                <!-- Current Money Display in Wallet -->
+                <div
+                    style="background: rgba(46, 125, 50, 0.1); border: 2px solid #2e7d32; border-radius: 10px; padding: 15px; margin-bottom: 20px;">
+                    <h4 style="margin: 0 0 5px 0; color: #2e7d32;">💰 Your Money:</h4>
+                    <div style="font-size: 2.2em; font-weight: bold; color: #2e7d32;" id="walletTotalMoney">$0</div>
+                </div>
+
+                <p>Use your money to buy snacks:</p>
+
+                <div class="money-buttons">
+                    <div style="display: flex; flex-direction: column; align-items: center; margin: 0 10px;">
+                        <button class="bill hundred" id="hundred-btn">💵<br>$100</button>
+                        <div style="display: flex; gap: 5px; margin-top: 5px;">
+                            <button class="plus-minus-btn" id="hundred-plus">+</button>
+                            <button class="plus-minus-btn" id="hundred-minus">−</button>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: center; margin: 0 10px;">
+                        <button class="bill ten" id="ten-btn">💵<br>$10</button>
+                        <div style="display: flex; gap: 5px; margin-top: 5px;">
+                            <button class="plus-minus-btn" id="ten-plus">+</button>
+                            <button class="plus-minus-btn" id="ten-minus">−</button>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: center; margin: 0 10px;">
+                        <button class="bill one" id="one-btn">💵<br>$1</button>
+                        <div style="display: flex; gap: 5px; margin-top: 5px;">
+                            <button class="plus-minus-btn" id="one-plus">+</button>
+                            <button class="plus-minus-btn" id="one-minus">−</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-secondary" id="closeTicket">Close Booth</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
