@@ -2,8 +2,24 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #2e7d32 0%, #388e3c 50%, #4caf50 100%);
+            background: linear-gradient(-45deg, #2e7d32, #388e3c, #4caf50, #66bb6a);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             min-height: 100vh;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .container {
@@ -17,7 +33,7 @@
             color: white;
             font-size: 3em;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .subtitle {
@@ -39,7 +55,7 @@
             border-radius: 15px;
             padding: 25px;
             text-align: center;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
             cursor: pointer;
             transition: all 0.3s ease;
             border: 3px solid #8b4513;
@@ -47,7 +63,7 @@
 
         .game-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
             border-color: #ff4444;
         }
 
@@ -68,7 +84,7 @@
             background: white;
             border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
             margin-bottom: 20px;
             border: 3px solid #8b4513;
         }
@@ -288,7 +304,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0, 0, 0, 0.7);
             display: none;
             z-index: 1000;
             justify-content: center;
@@ -300,7 +316,7 @@
             border-radius: 20px;
             padding: 30px;
             text-align: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
             max-width: 400px;
             width: 90%;
             border: 3px solid #8b4513;
@@ -326,7 +342,7 @@
             transition: all 0.3s;
             border: 2px solid;
             user-select: none;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
         }
 
         .bill.hundred {
@@ -525,15 +541,38 @@
         }
 
         @keyframes homerun {
-            0%, 100% { transform: scale(1) rotateZ(0deg); }
-            25% { transform: scale(1.1) rotateZ(-5deg); }
-            75% { transform: scale(1.1) rotateZ(5deg); }
+
+            0%,
+            100% {
+                transform: scale(1) rotateZ(0deg);
+            }
+
+            25% {
+                transform: scale(1.1) rotateZ(-5deg);
+            }
+
+            75% {
+                transform: scale(1.1) rotateZ(5deg);
+            }
         }
 
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
         }
 
         .celebrate {
@@ -544,19 +583,19 @@
             .container {
                 padding: 10px;
             }
-            
+
             h1 {
                 font-size: 2.2em;
             }
-            
+
             .games-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .diamond-container {
                 flex-wrap: wrap;
             }
-            
+
             .bases {
                 flex-wrap: wrap;
             }
