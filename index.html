@@ -1959,12 +1959,6 @@
                         <div id="cbTicksContainer" style="position: relative; height: 50px;"></div>
                     </div>
 
-                    <!-- Hop circles — one per sub-step -->
-                    <div id="cbHopRow" style="margin-bottom: 15px;">
-                        <div style="font-size: 0.9em; color: #888; text-align: center; margin-bottom: 8px;" id="cbHopLabel">Count back:</div>
-                        <div id="cbHopCircles" style="display: flex; flex-wrap: wrap; gap: 7px; justify-content: center; padding: 12px; background: #f5f5f5; border-radius: 10px; border: 2px solid #ddd;"></div>
-                    </div>
-
                     <!-- Answer input -->
                     <div style="text-align: center; margin-bottom: 10px;">
                         <input type="number" id="cbStepInput" placeholder="?" style="width: 140px; padding: 15px; font-size: 2em; text-align: center; border: 3px solid #1976d2; border-radius: 10px; font-family: 'Courier New', monospace;">
@@ -4028,26 +4022,31 @@
             container.appendChild(wrap);
         }
 
-        function cbSubStep(chunk) {
-            return chunk % 10 === 0 ? 10 : 1;
-        }
+        function drawStepHashes(fromPos, chunk) {
+            document.querySelectorAll('.cb-step-hash').forEach(el => el.remove());
 
-        function buildHopCircles(chunk) {
-            const subStep = cbSubStep(chunk);
-            const count = chunk / subStep;
-            const label = subStep === 10 ? '−10' : '−1';
+            const interval = chunk % 100 === 0 ? 100 : chunk % 10 === 0 ? 10 : 1;
+            const toPos = fromPos - chunk;
+            const container = document.getElementById('cbTicksContainer');
 
-            document.getElementById('cbHopLabel').textContent =
-                `Count back by ${subStep}s — ${count} hop${count !== 1 ? 's' : ''}:`;
+            for (let n = toPos; n < fromPos; n += interval) {
+                const pct = cbLinePercent(n);
+                const isLanding = n === toPos;
 
-            const container = document.getElementById('cbHopCircles');
-            container.innerHTML = '';
-            for (let i = 0; i < count; i++) {
-                const c = document.createElement('div');
-                c.id = `cbHop-${i}`;
-                c.style.cssText = `width:44px;height:44px;border-radius:50%;background:#e0e0e0;border:2px solid #bbb;display:flex;align-items:center;justify-content:center;font-size:0.75em;font-weight:bold;color:#888;transition:all 0.2s;`;
-                c.textContent = label;
-                container.appendChild(c);
+                const wrap = document.createElement('div');
+                wrap.className = 'cb-step-hash';
+                wrap.style.cssText = `position:absolute;left:${pct}%;transform:translateX(-50%);text-align:center;`;
+
+                const line = document.createElement('div');
+                line.style.cssText = `width:2px;height:${isLanding ? 20 : 13}px;background:${isLanding ? '#f57c00' : '#aaa'};margin:0 auto;`;
+
+                const label = document.createElement('div');
+                label.style.cssText = `font-size:0.78em;font-weight:bold;color:${isLanding ? '#f57c00' : '#aaa'};margin-top:3px;white-space:nowrap;`;
+                label.textContent = n;
+
+                wrap.appendChild(line);
+                wrap.appendChild(label);
+                container.appendChild(wrap);
             }
         }
 
@@ -4059,7 +4058,7 @@
                 `At ${cbCurrentPosition} — subtract ${chunk}`;
             document.getElementById('cbStepInput').value = '';
             document.getElementById('countBackFeedback').style.display = 'none';
-            buildHopCircles(chunk);
+            drawStepHashes(cbCurrentPosition, chunk);
         }
 
         function nextCountBackStep() {
@@ -4083,79 +4082,47 @@
                 return;
             }
 
-            // Correct — disable input while animating
             feedback.style.display = 'none';
-            document.getElementById('cbNextStepBtn').disabled = true;
-            document.getElementById('cbStepInput').disabled = true;
-
-            const fromPos = cbCurrentPosition;
             cbCurrentPosition = expected;
             cbCurrentChunkIndex++;
             const isLast = cbCurrentChunkIndex >= cbChunks.length;
 
-            // Animate hop circles + ball together
-            const subStep = cbSubStep(chunk);
-            const count = chunk / subStep;
-            const hopDelay = Math.max(100, Math.min(300, 1800 / count));
+            // Move ball smoothly
+            document.getElementById('cbBall').style.transition = 'left 0.7s ease';
+            document.getElementById('cbBall').style.left = cbLinePercent(cbCurrentPosition) + '%';
 
-            let i = 0;
-            function doHop() {
-                if (i >= count) {
-                    // Animation done — update number line tick
-                    if (isLast) {
-                        const endTick = document.getElementById(`cbTick-${cbCorrectAnswer}`);
-                        if (endTick) {
-                            endTick.querySelector('div').style.background = '#388e3c';
-                            endTick.querySelectorAll('div')[1].style.color = '#2e7d32';
-                        }
-                    } else {
-                        addCbTick(cbCurrentPosition, 'mid');
-                    }
-
-                    document.getElementById('cbNextStepBtn').disabled = false;
-                    document.getElementById('cbStepInput').disabled = false;
-
-                    if (isLast) {
-                        document.getElementById('cbNextStepBtn').style.display = 'none';
-                        document.getElementById('cbAnswerDisplay').style.display = 'block';
-                        document.getElementById('cbAnswerText').textContent =
-                            `🎉 ${cbMinuend} − ${cbSubtrahend} = ${cbCorrectAnswer}!`;
-                        countBackScore++;
-                        document.getElementById('countBackScore').textContent = countBackScore;
-                        feedback.textContent = `⚾ Home Run! Perfect count back!`;
-                        feedback.className = 'feedback success';
-                        feedback.style.display = 'block';
-                        if (countBackCurrentQuestion < countBackTotalQuestions) {
-                            document.getElementById('cbNextProblemBtn').style.display = 'inline-block';
-                        } else {
-                            setTimeout(showCountBackResults, 2000);
-                        }
-                    } else {
-                        setTimeout(() => {
-                            showCountBackStep();
-                            document.getElementById('cbStepInput').focus();
-                        }, 300);
-                    }
-                    return;
+            // Update number line ticks
+            if (isLast) {
+                const endTick = document.getElementById(`cbTick-${cbCorrectAnswer}`);
+                if (endTick) {
+                    endTick.querySelector('div').style.background = '#388e3c';
+                    endTick.querySelectorAll('div')[1].style.color = '#2e7d32';
                 }
-
-                // Light up next circle
-                const circle = document.getElementById(`cbHop-${i}`);
-                if (circle) {
-                    circle.style.background = '#ff9800';
-                    circle.style.borderColor = '#f57c00';
-                    circle.style.color = 'white';
-                }
-
-                // Move ball to intermediate position
-                const ballPos = fromPos - (i + 1) * subStep;
-                document.getElementById('cbBall').style.transition = `left ${hopDelay * 0.8}ms ease`;
-                document.getElementById('cbBall').style.left = cbLinePercent(ballPos) + '%';
-
-                i++;
-                setTimeout(doHop, hopDelay);
+            } else {
+                addCbTick(cbCurrentPosition, 'mid');
             }
-            doHop();
+
+            setTimeout(() => {
+                if (isLast) {
+                    document.getElementById('cbNextStepBtn').style.display = 'none';
+                    document.getElementById('cbAnswerDisplay').style.display = 'block';
+                    document.getElementById('cbAnswerText').textContent =
+                        `🎉 ${cbMinuend} − ${cbSubtrahend} = ${cbCorrectAnswer}!`;
+                    countBackScore++;
+                    document.getElementById('countBackScore').textContent = countBackScore;
+                    feedback.textContent = `⚾ Home Run! Perfect count back!`;
+                    feedback.className = 'feedback success';
+                    feedback.style.display = 'block';
+                    if (countBackCurrentQuestion < countBackTotalQuestions) {
+                        document.getElementById('cbNextProblemBtn').style.display = 'inline-block';
+                    } else {
+                        setTimeout(showCountBackResults, 2000);
+                    }
+                } else {
+                    showCountBackStep();
+                    document.getElementById('cbStepInput').focus();
+                }
+            }, 750);
         }
 
         function nextCountBackProblem() {
